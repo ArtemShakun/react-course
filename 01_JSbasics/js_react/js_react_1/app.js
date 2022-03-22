@@ -31,11 +31,30 @@ function setListeners() {
 
 function parseData(data) {
     if (!data) {
-        return ''
+        return '';
     }
     let htmlStr = data.map(data => data.name);
     return htmlStr.join(', ');
 }
+
+function getNameCountryByCode(borders) {
+    if (!borders) {
+        return '';
+    }
+
+    let countries = store.getData();
+    let bordersName = [];
+    borders.forEach(border => {
+
+        countries.find(country => {
+            if (country.alpha3Code === border) {
+                bordersName.push(country.name);
+            }
+        })
+    })
+    return bordersName.join(', ');
+}
+
 function renderFilterRegion(countries) {
     htmlStr = `<option value="disabled">Enter region</option>`;
     countries.forEach((country) => {
@@ -56,6 +75,7 @@ function renderCountries(countries) {
                 <td>${country.area}</td>
                 <td>${parseData(country.languages)}</td>
                 <td>${parseData(country.currencies)}</td>
+                <td>${getNameCountryByCode(country.borders)}</td>
                 <td><img src="${country.flag}" width="50"></td>
                 </tr>`
         return html;
@@ -78,6 +98,7 @@ fetch('https://restcountries.com/v2/all')
             alpha3Code: country.alpha3Code,
             languages: country.languages,
             currencies: country.currencies,
+            borders: country.borders,
         }));
         store.setData(mappedCountries);
         renderFilterRegion(mappedCountries);
