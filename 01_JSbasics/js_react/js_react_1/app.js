@@ -6,12 +6,37 @@ const store = function() {
     }
 }();
 
+function parseData(data) {
+    if (!data) {
+        return '';
+    }
+    return data.map(data => data.name).join(', ');
+}
+
+function getNameCountryByCode(borders) {
+    const countries = store.getData();
+    const borderCountryNames = [];
+
+    if (!borders) {
+        return '';
+    }
+
+    borders.map(border => {
+        countries.find(country => {
+            if (country.alpha3Code === border) {
+                borderCountryNames.push(country.name);
+            }
+        })
+    })
+    return borderCountryNames.join(', ');
+}
+
 function setListeners() {
+    const countries = store.getData();
     document.getElementById('search').onkeyup = e => {
-        let search = e.currentTarget.value;
+        const search = e.currentTarget.value;
         search = search.trim().toLowerCase();
-        let countries = store.getData();
-        let filteredCountries = countries.filter(country => {
+        const filteredCountries = countries.filter(country => {
             return country.name.toLowerCase().indexOf(search) > -1 ||
                 country.capital.toLowerCase().indexOf(search) > -1 ||
                 country.region.toLowerCase().indexOf(search) > -1
@@ -20,44 +45,21 @@ function setListeners() {
     }
 
     document.getElementById('regions').onchange = e => {
-        let region = e.currentTarget.value.toLowerCase();
-        let countries = store.getData();
-        let filteredRegion = countries.filter(country => {
-            return country.region.toLowerCase().indexOf(region) > -1;
-        })
-        renderCountries(filteredRegion);
+        const region = e.currentTarget.value.toLowerCase();
+        if (region !== 'all') {
+            const filteredRegion = countries.filter(country => {
+                return country.region.toLowerCase().indexOf(region) > -1;
+            });
+            renderCountries(filteredRegion);
+        } else {
+            renderCountries(countries);
+        }
     }
 }
 
-function parseData(data) {
-    if (!data) {
-        return '';
-    }
-    let htmlStr = data.map(data => data.name);
-    return htmlStr.join(', ');
-}
-
-function getNameCountryByCode(borders) {
-    if (!borders) {
-        return '';
-    }
-
-    let countries = store.getData();
-    let bordersName = [];
-    borders.forEach(border => {
-
-        countries.find(country => {
-            if (country.alpha3Code === border) {
-                bordersName.push(country.name);
-            }
-        })
-    })
-    return bordersName.join(', ');
-}
-
-function renderFilterRegion(countries) {
-    htmlStr = `<option value="disabled">Enter region</option>`;
-    countries.forEach((country) => {
+function renderRegionsForFilter(countries) {
+    htmlStr = '<option value="all">All countries</option>';
+    countries.map((country) => {
             if(!htmlStr.includes(country.region)) {
                 htmlStr += `<option value=${country.region}>${country.region}</option>`;
             }
@@ -101,7 +103,7 @@ fetch('https://restcountries.com/v2/all')
             borders: country.borders,
         }));
         store.setData(mappedCountries);
-        renderFilterRegion(mappedCountries);
+        renderRegionsForFilter(mappedCountries);
         renderCountries(mappedCountries);
         setListeners();
     });
