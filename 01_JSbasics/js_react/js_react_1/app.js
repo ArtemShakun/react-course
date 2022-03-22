@@ -18,6 +18,32 @@ function setListeners() {
         });
         renderCountries(filteredCountries);
     }
+
+    document.getElementById('regions').onchange = e => {
+        let region = e.currentTarget.value.toLowerCase();
+        let countries = store.getData();
+        let filteredRegion = countries.filter(country => {
+            return country.region.toLowerCase().indexOf(region) > -1;
+        })
+        renderCountries(filteredRegion);
+    }
+}
+
+function parseData(data) {
+    if (!data) {
+        return ''
+    }
+    let htmlStr = data.map(data => data.name);
+    return htmlStr.join(', ');
+}
+function renderFilterRegion(countries) {
+    htmlStr = `<option value="disabled">Enter region</option>`;
+    countries.forEach((country) => {
+            if(!htmlStr.includes(country.region)) {
+                htmlStr += `<option value=${country.region}>${country.region}</option>`;
+            }
+    });
+    document.getElementById('regions').innerHTML = htmlStr;
 }
 
 function renderCountries(countries) {
@@ -28,21 +54,13 @@ function renderCountries(countries) {
                 <td>${country.region}</td>
                 <td>${country.population}</td>
                 <td>${country.area}</td>
-                <td><img src="${td.flag}" width="50"></td>
+                <td>${parseData(country.languages)}</td>
+                <td>${parseData(country.currencies)}</td>
+                <td><img src="${country.flag}" width="50"></td>
                 </tr>`
         return html;
     }, '');
 
-    // for(let country of countries) {
-    //     htmlStr += `<tr>
-    //             <td>${country.name}</td>
-    //             <td>${country.capital }</td>
-    //             <td>${country.region}</td>
-    //             <td>${country.population}</td>
-    //             <td>${country.area}</td>
-    //             <td><img src="${country.flag}" width="50"></td>
-    //         </tr>`
-    // }
     document.querySelector('.table tbody').innerHTML = htmlStr;
     // SOLID. S - Single Responsibility.
 }
@@ -57,9 +75,12 @@ fetch('https://restcountries.com/v2/all')
             area: country.area,
             flag: country.flag,
             region: country.region || '',
-            alpha3Code: country.alpha3Code
+            alpha3Code: country.alpha3Code,
+            languages: country.languages,
+            currencies: country.currencies,
         }));
         store.setData(mappedCountries);
+        renderFilterRegion(mappedCountries);
         renderCountries(mappedCountries);
         setListeners();
     });
