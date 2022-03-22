@@ -34,7 +34,7 @@ function getNameCountryByCode(borders) {
 function setListeners() {
     const countries = store.getData();
     document.getElementById('search').onkeyup = e => {
-        const search = e.currentTarget.value;
+        let search = e.currentTarget.value;
         search = search.trim().toLowerCase();
         const filteredCountries = countries.filter(country => {
             return country.name.toLowerCase().indexOf(search) > -1 ||
