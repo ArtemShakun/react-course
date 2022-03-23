@@ -6,7 +6,7 @@ const store = function() {
     }
 }();
 
-function parseData(data) {
+function getNamesStr(data) {
     if (!data) {
         return '';
     }
@@ -16,10 +16,6 @@ function parseData(data) {
 function getNameCountryByCode(borders) {
     const countries = store.getData();
     const borderCountryNames = [];
-
-    if (!borders) {
-        return '';
-    }
 
     borders.map(border => {
         countries.find(country => {
@@ -45,12 +41,10 @@ function setListeners() {
     }
 
     document.getElementById('regions').onchange = e => {
-        const region = e.currentTarget.value.toLowerCase();
+        const region = e.currentTarget.value;
         if (region !== 'all') {
-            const filteredRegion = countries.filter(country => {
-                return country.region.toLowerCase().indexOf(region) > -1;
-            });
-            renderCountries(filteredRegion);
+            const countriesByRegion = countries.filter(country => country.region === region);
+            renderCountries(countriesByRegion);
         } else {
             renderCountries(countries);
         }
@@ -58,12 +52,14 @@ function setListeners() {
 }
 
 function renderRegionsForFilter(countries) {
+    const uniqueRegions = countries.reduce((acc, country) => {
+        if (!acc.includes(country.region)) {
+            acc.push(country.region);
+        }
+        return acc;
+    }, []);
     htmlStr = '<option value="all">All countries</option>';
-    countries.map((country) => {
-            if(!htmlStr.includes(country.region)) {
-                htmlStr += `<option value=${country.region}>${country.region}</option>`;
-            }
-    });
+    htmlStr += uniqueRegions.map(country => `<option value=${country}>${country}</option>`).join('');
     document.getElementById('regions').innerHTML = htmlStr;
 }
 
@@ -75,8 +71,8 @@ function renderCountries(countries) {
                 <td>${country.region}</td>
                 <td>${country.population}</td>
                 <td>${country.area}</td>
-                <td>${parseData(country.languages)}</td>
-                <td>${parseData(country.currencies)}</td>
+                <td>${getNamesStr(country.languages)}</td>
+                <td>${getNamesStr(country.currencies)}</td>
                 <td>${getNameCountryByCode(country.borders)}</td>
                 <td><img src="${country.flag}" width="50"></td>
                 </tr>`
@@ -100,7 +96,7 @@ fetch('https://restcountries.com/v2/all')
             alpha3Code: country.alpha3Code,
             languages: country.languages,
             currencies: country.currencies,
-            borders: country.borders,
+            borders: country.borders || [],
         }));
         store.setData(mappedCountries);
         renderRegionsForFilter(mappedCountries);
