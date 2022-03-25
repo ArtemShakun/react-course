@@ -25,15 +25,15 @@ function setListeners() {
         setInfo(date);
     };
 
-    document.querySelector('#js-buttonCurrencyConverter').onclick = () => {
+    document.querySelector('.js-buttonCurrencyConverter').onclick = () => {
         const currencies = store.getDataCurrencies();
         const countryCurrency = currencies.find(currency => currency.currencyType === selectCurrencyType.value);
-        inputResult.innerText = (countryCurrency) ? store.getInputNumberUAH().value * countryCurrency.rate.toFixed('2') : '0.00';
+        inputResult.innerText = (countryCurrency) ? inputNumberUAH.value * countryCurrency.rate.toFixed('2') : '0.00';
     };
 }
 
 function clearingForm() {
-    store.getInputNumberUAH().value = '';
+    inputNumberUAH.value = '';
     inputResult.innerText = '0.00';
 }
 
