@@ -10,7 +10,7 @@
 <body>
     <div class="container">
         <div class="d-flex justify-content-end">
-            <input id="js-date" type="date" value="2022-03-24">
+            <input class="js-date" type="date" value="2022-03-24">
         </div>
         <table class="table table-hover">
             <thead>
@@ -27,10 +27,10 @@
         </table>
             <div class="input-group mb-3">
                 <span class="input-group-text">UAH</span>
-                <span class="input-group-text" id="js-result">0.00</span>
-                <input type="text" class="form-control" id="js-inputUah" aria-label="Dollar amount (with dot and two decimal places)">
-                <select class="form-select" id="js-inputGroupSelect03" aria-label="Example select with button addon">
-                    <option selected>Choose...</option>
+                <span class="input-group-text js-field-result">0.00</span>
+                <input type="text" class="form-control js-inputUAH" aria-label="Dollar amount (with dot and two decimal places)">
+                <select class="form-select js-field-currency" id="inputGroupSelect03" aria-label="Example select with button addon">
+                    
                 </select>
                 <button class="btn btn-outline-secondary" id="js-buttonCurrencyConverter" type="button">Button</button>
             </div>
