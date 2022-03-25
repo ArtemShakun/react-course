@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', initApp);
 const inputNumberUAH = document.querySelector('.js-inputUAH');
 const inputResult = document.querySelector('.js-field-result');
 const selectCurrencyType = document.querySelector('.js-field-currency');
-const inputCurrentDate = document.querySelector('.js-date');
+const inputDate = document.querySelector('.js-date');
 
 const store = function() {
     let currencies = [];
@@ -14,12 +14,12 @@ const store = function() {
         getDate: () => localStorage.getItem('date'),
 
         setDataCurrencies: newData => currencies = newData,
-        getDataCurrencies: () => currencies
+        getDataCurrencies: () => currencies,
     }
 }();
 
 function setListeners() {
-    inputCurrentDate.onchange = e => {
+    inputDate.onchange = e => {
         let date = e.target.value;
         store.setDate(date);
         setInfo(date);
@@ -28,16 +28,16 @@ function setListeners() {
     document.querySelector('.js-buttonCurrencyConverter').onclick = () => {
         const currencies = store.getDataCurrencies();
         const countryCurrency = currencies.find(currency => currency.currencyType === selectCurrencyType.value);
-        inputResult.innerText = (countryCurrency) ? inputNumberUAH.value * countryCurrency.rate.toFixed('2') : '0.00';
+        inputResult.innerText = (countryCurrency) ? (inputNumberUAH.value / countryCurrency.rate).toFixed('2') : '0.00';
     };
-}
+};
 
 function clearingForm() {
     inputNumberUAH.value = '';
     inputResult.innerText = '0.00';
-}
+};
 
-function renderExchangeRates(currencies) {
+function renderCurrenciesData(currencies) {
     let htmlStr = currencies.reduce((acc, currencies, index) => {
         acc += `<tr>
                 <td>${index += 1}</td>
@@ -49,16 +49,16 @@ function renderExchangeRates(currencies) {
         return acc;
     }, '');
     document.querySelector('table tbody').innerHTML = htmlStr;
-}
+};
 
-function renderSelectByCurrencyType(currencies) {
+function renderSelectCurrencyType(currencies) {
     const sortCurrenciesType = [...currencies].sort((a, b) => a.currencyType > b.currencyType ? 1 : -1);
     let htmlStr = sortCurrenciesType.reduce((acc, currencies) => {
         acc += `<option>${currencies.currencyType}</option>`
         return acc;
     }, '<option selected>Choose...</option>');
     selectCurrencyType.innerHTML = htmlStr;
-}
+};
 
 async function setInfo(date) {
     try {
@@ -78,18 +78,18 @@ async function setInfo(date) {
         }));
 
         store.setDataCurrencies(mappedCurrencies);
-        renderExchangeRates(mappedCurrencies);
-        renderSelectByCurrencyType(mappedCurrencies);
+        renderCurrenciesData(mappedCurrencies);
+        renderSelectCurrencyType(mappedCurrencies);
         setListeners();
         clearingForm();
     } catch (error) {
         alert(error.message);
     };
-}
+};
 
 function initApp() {
-    (!store.getDate()) ? store.setDate(new Date().format("yyyy-mm-dd"))
-        : inputCurrentDate.value = store.getDate();
+    (!store.getDate()) ? store.setDate(new Date().toISOString().slice(0, 10))
+        : inputDate.value = store.getDate();
 
     setInfo(store.getDate());
-}
+};

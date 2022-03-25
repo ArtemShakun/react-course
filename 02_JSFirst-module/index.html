@@ -8,35 +8,33 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container mt-5">
         <div class="d-flex justify-content-end">
-            <input class="js-date" type="date" value="2022-03-24">
+            <input class="js-date" type="date">
         </div>
-        <table class="table table-hover">
+        <table class="table table-hover mt-2">
             <thead>
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Назва</th>
                     <th scope="col">Курс</th>
-                    <th scope="col">Код країни</th>
+                    <th scope="col">Назва курсу</th>
                     <th scope="col">Дата</th>
                 </tr>
             </thead>
             <tbody>
             </tbody>
         </table>
-            <div class="input-group mb-3">
-                <span class="input-group-text">UAH</span>
-                <span class="input-group-text js-field-result">0.00</span>
-                <input type="text" class="form-control js-inputUAH" aria-label="Dollar amount (with dot and two decimal places)">
-                <select class="form-select js-field-currency" id="inputGroupSelect03" aria-label="Example select with button addon">
-                    
-                </select>
-                <button class="btn btn-outline-secondary js-buttonCurrencyConverter" type="button">Button</button>
-            </div>
-        
+        <div class="input-group mb-3">
+            <span class="input-group-text">UAH</span>
+            <input type="number" class="form-control js-inputUAH">
+            <select class="form-select js-field-currency" id="inputGroupSelect03" aria-label="Example select with button addon">
+            </select>
+            <span class="input-group-text js-field-result">0.00</span>
+            <button class="btn btn-outline-secondary js-buttonCurrencyConverter" type="button">Button</button>
+        </div>
     </div>
-    
+
     <script src="app.js"></script>
 </body>
 </html>
