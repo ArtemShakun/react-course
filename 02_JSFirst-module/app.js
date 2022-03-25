@@ -2,21 +2,19 @@
 document.addEventListener('DOMContentLoaded', initApp);
 
 // Global variables
+const inputNumberUAH = document.querySelector('.js-inputUAH');
 const inputResult = document.querySelector('.js-field-result');
 const selectCurrencyType = document.querySelector('.js-field-currency');
 const inputCurrentDate = document.querySelector('.js-date');
 
 const store = function() {
-    const inputNumberUAH = document.querySelector('.js-inputUAH');
     let currencies = [];
     return {
         setDate: newData => localStorage.setItem('date', newData),
         getDate: () => localStorage.getItem('date'),
 
         setDataCurrencies: newData => currencies = newData,
-        getDataCurrencies: () => currencies,
-
-        getInputNumberUAH: () => inputNumberUAH,
+        getDataCurrencies: () => currencies
     }
 }();
 
