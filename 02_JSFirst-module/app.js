@@ -28,7 +28,7 @@ function setListeners() {
     document.querySelector('.js-buttonCurrencyConverter').onclick = () => {
         const currencies = store.getDataCurrencies();
         const countryCurrency = currencies.find(currency => currency.currencyType === selectCurrencyType.value);
-        inputResult.innerText = (countryCurrency) ? (inputNumberUAH.value / countryCurrency.rate).toFixed('2') : '0.00';
+        inputResult.innerText = (countryCurrency) ? Math.trunc((inputNumberUAH.value / countryCurrency.rate) * 100) / 100 : '0.00';
     };
 };
 
@@ -37,7 +37,7 @@ function clearingForm() {
     inputResult.innerText = '0.00';
 };
 
-function renderCurrenciesData(currencies) {
+function renderDataCurrencies(currencies) {
     let htmlStr = currencies.reduce((acc, currencies, index) => {
         acc += `<tr>
                 <td>${index += 1}</td>
@@ -78,7 +78,7 @@ async function setInfo(date) {
         }));
 
         store.setDataCurrencies(mappedCurrencies);
-        renderCurrenciesData(mappedCurrencies);
+        renderDataCurrencies(mappedCurrencies);
         renderSelectCurrencyType(mappedCurrencies);
         setListeners();
         clearingForm();
