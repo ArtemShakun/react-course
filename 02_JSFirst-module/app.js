@@ -28,7 +28,12 @@ function setListeners() {
     document.querySelector('.js-buttonCurrencyConverter').onclick = () => {
         const currencies = store.getDataCurrencies();
         const countryCurrency = currencies.find(currency => currency.currencyType === selectCurrencyType.value);
-        inputResult.innerText = (countryCurrency) ? Math.trunc((inputNumberUAH.value / countryCurrency.rate) * 100) / 100 : '0.00';
+
+        // (!countryCurrency || inputNumberUAH.value.length === 0) ? alert('Missing value!') 
+        //     : inputResult.innerText = Math.trunc((inputNumberUAH.value / countryCurrency.rate) * 100) / 100;
+        inputResult.innerText = (countryCurrency || inputNumberUAH.value.length !== 0) 
+            ? Math.trunc((inputNumberUAH.value / countryCurrency.rate) * 100) / 100 
+            : alert('Field is not valid');
     };
 };
 
@@ -92,4 +97,11 @@ function initApp() {
         : inputDate.value = store.getDate();
 
     setInfo(store.getDate());
+};
+
+const inputCalendar = document.querySelector('.calendar');
+const spanDate = document.querySelector('.sidebar__date-calendar-text');
+inputCalendar.onchange = e => {
+            let date = e.target.value;
+            spanDate.innerText = date;
 };
