@@ -2,10 +2,13 @@
 document.addEventListener('DOMContentLoaded', initApp);
 
 // Global variables
-const inputNumberUAH = document.querySelector('.js-inputUAH');
-const inputResult = document.querySelector('.js-field-result');
-const selectCurrencyType = document.querySelector('.js-field-currency');
-const inputDate = document.querySelector('.js-date');
+const jsSelectors = {
+    'inputResult': document.querySelector('.js-select-result'),
+    'inputNumberUAH': document.querySelector('.js-field-UAH'),
+    'selectCurrencyType': document.querySelector('.js-select-currencies'),
+    'spanDate': document.querySelector('.js-date-field'),
+    'titleDate': document.querySelector('.js-table-date-title'),
+}
 
 const store = function() {
     let currencies = [];
@@ -18,28 +21,32 @@ const store = function() {
     }
 }();
 
-function setListeners() {
-    inputDate.onchange = e => {
-        let date = e.target.value;
-        store.setDate(date);
-        setInfo(date);
-    };
+function updateDate() {
+    jsSelectors.spanDate.innerText = store.getDate();
+    jsSelectors.titleDate.innerText = store.getDate();
+}
 
-    document.querySelector('.js-buttonCurrencyConverter').onclick = () => {
-        const currencies = store.getDataCurrencies();
-        const countryCurrency = currencies.find(currency => currency.currencyType === selectCurrencyType.value);
-
-        // (!countryCurrency || inputNumberUAH.value.length === 0) ? alert('Missing value!') 
-        //     : inputResult.innerText = Math.trunc((inputNumberUAH.value / countryCurrency.rate) * 100) / 100;
-        inputResult.innerText = (countryCurrency || inputNumberUAH.value.length !== 0) 
-            ? Math.trunc((inputNumberUAH.value / countryCurrency.rate) * 100) / 100 
-            : alert('Field is not valid');
-    };
+function resetForm() {
+    jsSelectors.inputNumberUAH.value = '';
+    jsSelectors.inputResult.placeholder = '0.00';
 };
 
-function clearingForm() {
-    inputNumberUAH.value = '';
-    inputResult.innerText = '0.00';
+function setListeners() {
+    document.querySelector('.js-calendar').onchange = e => {
+        store.setDate(e.target.value);
+        updateDate();
+        setInfo(e.target.value);
+    };
+
+    document.querySelector('.js-reset-form').onclick = () => resetForm();
+
+    document.querySelector('.js-button-convertor').onclick = () => {
+        const currencies = store.getDataCurrencies();
+        const countryCurrency = currencies.find(currency => currency.currencyType === jsSelectors.selectCurrencyType.value);
+        jsSelectors.inputResult.placeholder = (countryCurrency && jsSelectors.inputNumberUAH.value.length !== 0) 
+            ? Math.trunc((jsSelectors.inputNumberUAH.value / countryCurrency.rate) * 100) / 100 
+            : '0.00';
+    };
 };
 
 function renderDataCurrencies(currencies) {
@@ -49,7 +56,6 @@ function renderDataCurrencies(currencies) {
                 <td>${currencies.name}</td>
                 <td>${currencies.rate}</td>
                 <td>${currencies.currencyType}</td>
-                <td>${currencies.date}</td>
         </tr>`
         return acc;
     }, '');
@@ -62,7 +68,7 @@ function renderSelectCurrencyType(currencies) {
         acc += `<option>${currencies.currencyType}</option>`
         return acc;
     }, '<option selected>Choose...</option>');
-    selectCurrencyType.innerHTML = htmlStr;
+    jsSelectors.selectCurrencyType.innerHTML = htmlStr;
 };
 
 async function setInfo(date) {
@@ -79,29 +85,22 @@ async function setInfo(date) {
             name: currencies.txt,
             rate: currencies.rate,
             currencyType: currencies.cc,
-            date: currencies.exchangedate,
         }));
 
         store.setDataCurrencies(mappedCurrencies);
         renderDataCurrencies(mappedCurrencies);
         renderSelectCurrencyType(mappedCurrencies);
         setListeners();
-        clearingForm();
+        resetForm();
     } catch (error) {
         alert(error.message);
     };
 };
 
 function initApp() {
-    (!store.getDate()) ? store.setDate(new Date().toISOString().slice(0, 10))
-        : inputDate.value = store.getDate();
-
+    if (!store.getDate()) {
+        store.setDate(new Date().toISOString().slice(0, 10));
+    }
+    updateDate();
     setInfo(store.getDate());
-};
-
-const inputCalendar = document.querySelector('.calendar');
-const spanDate = document.querySelector('.sidebar__date-calendar-text');
-inputCalendar.onchange = e => {
-            let date = e.target.value;
-            spanDate.innerText = date;
 };

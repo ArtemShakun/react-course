@@ -5,11 +5,6 @@
     margin: 0;
     box-sizing: border-box;
 }
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
-    background-color: #f9f7f5;
-}
 input,
 select {
     outline: 0 !important;
@@ -24,6 +19,11 @@ select::-webkit-inner-spin-button,
 select::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    background-color: #f9f7f5;
 }
 h2 {
     font-weight: bold;
@@ -42,7 +42,7 @@ h3 {
         4px 4px 4px rgba(0, 0, 0, 0.03);
 }
 
-.date-field {
+.date-field-field {
     padding-bottom: 20px;
 }
 
@@ -148,12 +148,20 @@ input[type='date'] {
     width: 50%;
     padding-bottom: 2px;
     margin-right: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
 }
+
 .sidebar__converter-form-currencies > input {
     border: none;
     border-bottom: 2px solid #bdbdbd;
     width: 35%;
 }
+
+.sidebar__converter-form-currencies > input:disabled {
+    background-color: white;
+}
+
 .sidebar__converter-form-button {
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
