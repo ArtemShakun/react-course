@@ -5,10 +5,12 @@
     margin: 0;
     box-sizing: border-box;
 }
+
 input,
 select {
     outline: 0 !important;
 }
+
 input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -20,16 +22,19 @@ select::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
 body {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
     background-color: #f9f7f5;
 }
+
 h2 {
     font-weight: bold;
     font-size: 18px;
     padding: 50px 0px 0px 50px;
 }
+
 h3 {
     font-weight: normal;
     font-size: 16px;
@@ -53,12 +58,13 @@ h3 {
     background-repeat: no-repeat;
     background-position: right bottom 5px;
     background-size: 30px 30px;
-    margin-bottom: 8px;
+    margin-bottom: 25px;
     border-bottom: 2px solid #bdbdbd;
     width: 80%;
     height: 50px;
     margin-left: 50px;
 }
+
 input[type='date'] {
     position: absolute;
     top: 10px;
@@ -67,6 +73,7 @@ input[type='date'] {
     height: 30px;
     opacity: 0;
 }
+
 .sidebar__date-calendar-text {
     position: absolute;
     left: 8px;
@@ -85,9 +92,11 @@ input[type='date'] {
 .sidebar__converter-form {
     padding: 20px 0px 30px 50px;
 }
+
 .sidebar__converter-form-UAH {
     position: relative;
 }
+
 .sidebar__converter-form-UAH-span {
     background-color: #367a4d;
     display: inline-block;
@@ -112,6 +121,7 @@ input[type='date'] {
 .sidebar__converter-form-currencies {
     margin-top: 20px;
 }
+
 .input-close {
     position: absolute;
     right: 25px;
@@ -120,9 +130,11 @@ input[type='date'] {
     height: 32px;
     opacity: 0.3;
 }
+
 .input-close:hover {
     opacity: 1;
 }
+
 .input-close:before,
 .input-close:after {
     position: absolute;
@@ -132,12 +144,15 @@ input[type='date'] {
     width: 1px;
     background-color: #333;
 }
+
 .input-close:before {
     transform: rotate(45deg);
 }
+
 .input-close:after {
     transform: rotate(-45deg);
 }
+
 .sidebar__converter-form-currencies {
     margin-top: 30px;
 }
@@ -172,6 +187,7 @@ input[type='date'] {
     padding: 5px 30px;
     text-transform: uppercase;
 }
+
 .sidebar__converter-form-button:hover {
     background-color: #367a4d;
     color: white;
@@ -180,12 +196,12 @@ input[type='date'] {
 
 .table__block {
     background-color: white;
+    box-shadow: -4px -4px 4px rgba(0, 0, 0, 0.03),
+        4px 4px 4px rgba(0, 0, 0, 0.03);
 }
 
 .table__title {
     width: 100%;
-    box-shadow: -4px -4px 4px rgba(0, 0, 0, 0.03),
-        4px 4px 4px rgba(0, 0, 0, 0.03);
     padding-bottom: 10px;
 }
 
@@ -202,10 +218,13 @@ input[type='date'] {
     width: 80%;
     text-align: center;
 }
+
 thead {
     background-color: #367a4d;
     color: white;
 }
+
 .table-text-copyright {
-    padding: 20px 0px 50px 50px;
+    padding: 20px 0px 0px 50px;
+    font-size: 10px;
 }

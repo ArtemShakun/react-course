@@ -11,7 +11,7 @@
 <body>
     <div class="container mt-5">
         <div class="row">
-            <div class="col-4">
+            <div class="col-xl-4 col-lg-12">
                 <div class="sidebar">
 
                     <div class="sidebar__date">
@@ -24,13 +24,13 @@
                                 <input type="date" class="js-calendar" id="calendar" name="calendar">
                             </label>
                         </div>
-
                     </div>
 
-                    <div class="sidebar__converter">
+                    <div class="sidebar__converter mb-5">
                         <h2 class="sidebar__converter-title">
                             Конвертор валют
                         </h2>
+
                         <div class="sidebar__converter-form">
 
                             <div class="sidebar__converter-form-UAH">
@@ -42,20 +42,24 @@
                             <div class="sidebar__converter-form-currencies">
                                 <select class="js-select-currencies">
                                 </select>
-                                <input type="text" class="js-select-result" placeholder="0.00" disabled></input>
+                                <input type="text" class="js-field-result" placeholder="0.00" disabled></input>
                             </div>
-                            <button class="sidebar__converter-form-button js-button-convertor" type="submit">Convert</button>
+                            <button class="sidebar__converter-form-button js-button-convertor" type="button">Convert</button>
+
                         </div>
+
                     </div>
                 </div>
             </div>
-            <div class="col-8">
+
+            <div class="col-xl-8 col-lg-12">
+
                 <div class="table__block">
                     <div class="table__title">
                         <h2>Офіційний курс грифні щодо інших країн</h2>
                     </div>
                     <div class="table__date">
-                        <h3>На дату: <span class="table__date-current-date js-table-date-title"></span></h3>
+                        <h3>На дату: <span class="js-table-date-title"></span></h3>
                     </div>
                     <table class="table table-striped table-custom">
                         <thead>
@@ -67,22 +71,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td scope="col">#</th>
-                                <td scope="col">Код літерний</th>
-                                <td scope="col">Назва валюти</th>
-                                <td scope="col">Офіційний курс</th>
-                            </tr>
                         </tbody>
                     </table>
                     <div class="table-text-copyright">
                         (c) Artem Shakun
                     </div>
                 </div>
-            </div>
-            
-        </div>
 
+            </div>
+        </div>
     </div>
     <script src="app.js"></script>
 </body>

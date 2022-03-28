@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', initApp);
 
 // Global variables
 const jsSelectors = {
-    'inputResult': document.querySelector('.js-select-result'),
+    'inputResult': document.querySelector('.js-field-result'),
     'inputNumberUAH': document.querySelector('.js-field-UAH'),
     'selectCurrencyType': document.querySelector('.js-select-currencies'),
     'spanDate': document.querySelector('.js-date-field'),
@@ -24,7 +24,7 @@ const store = function() {
 function updateDate() {
     jsSelectors.spanDate.innerText = store.getDate();
     jsSelectors.titleDate.innerText = store.getDate();
-}
+};
 
 function resetForm() {
     jsSelectors.inputNumberUAH.value = '';
