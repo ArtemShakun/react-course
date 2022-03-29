@@ -20,8 +20,9 @@ const store = function() {
 }();
 
 function updateDate(date) {
-    jsSelectors.spanDate.innerText = date;
-    jsSelectors.titleDate.innerText = date;
+    let reverseDateStr = date.split('-').reverse().join('.');
+    jsSelectors.spanDate.innerText = reverseDateStr;
+    jsSelectors.titleDate.innerText = reverseDateStr;
     jsSelectors.calendar.value = date;
 };
 
