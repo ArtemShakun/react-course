@@ -8,22 +8,21 @@ const jsSelectors = {
     'selectCurrencyType': document.querySelector('.js-select-currencies'),
     'spanDate': document.querySelector('.js-date-field'),
     'titleDate': document.querySelector('.js-table-date-title'),
-}
+    'calendar': document.querySelector('.js-calendar'),
+};
 
 const store = function() {
     let currencies = [];
     return {
-        setDate: newData => localStorage.setItem('date', newData),
-        getDate: () => localStorage.getItem('date'),
-
         setDataCurrencies: newData => currencies = newData,
         getDataCurrencies: () => currencies,
     }
 }();
 
-function updateDate() {
-    jsSelectors.spanDate.innerText = store.getDate();
-    jsSelectors.titleDate.innerText = store.getDate();
+function updateDate(date) {
+    jsSelectors.spanDate.innerText = date;
+    jsSelectors.titleDate.innerText = date;
+    jsSelectors.calendar.value = date;
 };
 
 function resetForm() {
@@ -33,9 +32,10 @@ function resetForm() {
 
 function setListeners() {
     document.querySelector('.js-calendar').onchange = e => {
-        store.setDate(e.target.value);
-        updateDate();
-        setInfo(e.target.value);
+        let date = e.target.value;
+        localStorage.setItem('date', date);
+        updateDate(date);
+        setInfo(date);
     };
 
     document.querySelector('.js-reset-form').onclick = () => resetForm();
@@ -53,9 +53,9 @@ function renderDataCurrencies(currencies) {
     let htmlStr = currencies.reduce((acc, currencies, index) => {
         acc += `<tr>
                 <td>${index += 1}</td>
+                <td>${currencies.currencyType}</td>
                 <td>${currencies.name}</td>
                 <td>${currencies.rate}</td>
-                <td>${currencies.currencyType}</td>
         </tr>`
         return acc;
     }, '');
@@ -94,13 +94,15 @@ async function setInfo(date) {
         resetForm();
     } catch (error) {
         alert(error.message);
+        return false
     };
 };
 
 function initApp() {
-    if (!store.getDate()) {
-        store.setDate(new Date().toISOString().slice(0, 10));
+    if (!localStorage.getItem('date')) {
+        localStorage.setItem('date', new Date().toISOString().slice(0, 10));
     }
-    updateDate();
-    setInfo(store.getDate());
+    let date = localStorage.getItem('date');
+    updateDate(date);
+    setInfo(date);
 };
