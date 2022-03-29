@@ -94,7 +94,6 @@ async function setInfo(date) {
         resetForm();
     } catch (error) {
         alert(error.message);
-        return false
     };
 };
 
