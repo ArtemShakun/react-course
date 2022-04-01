@@ -17,16 +17,16 @@
 собственные методы:
 + showFuelConsumption(). возвращает строку объем двигателя + расход
 
-3. создать класс Auto_Electric().
++3. создать класс Auto_Electric().
 принимает те же аргументы +
-- емкость батареи (String)
++ емкость батареи (String)
 
 является как и Auto_Fuel подклассом класса Auto 
 собственные методы:
-- showBatteryConfig(). возвращает строку емкость батареи.
++ showBatteryConfig(). возвращает строку емкость батареи.
 
 пример:
-let tesla = new Auto_Electric(’Tesla’, ‘Model X’, 2020, ‘AF12124AEGJ32413’, ‘100 кВт/ч’)
++let tesla = new Auto_Electric(’Tesla’, ‘Model X’, 2020, ‘AF12124AEGJ32413’, ‘100 кВт/ч’)
 
 tesla.log() // ‘Tesla Model X 2020’
 tesla.checkVin() // true

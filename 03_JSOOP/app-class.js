@@ -6,15 +6,12 @@ class Auto {
         this.vin = vin;
     }
     log() {
-        console.log(this.brand + ' ' + this.model + ' ' + this.year);
+        console.log(`Brand: ${this.brand}, Model: ${this.model}, Year: ${this.year}`);
     }
     checkVin() {
-        if(this.vin.length < 16) {
-            return false;
-        }
-        return true;
+        console.log(this.vin.length === 16);
     }
-}
+};
 
 class Auto_Fuel extends Auto {
     constructor (brand, model, year, vin, engineСapacity, consumption) {
@@ -23,9 +20,9 @@ class Auto_Fuel extends Auto {
         this.consumption = consumption;
     }
     showFuelConsumption() {
-        console.log(this.engineСapacity + ' ' + this.consumption);
+        console.log(`Engine capacity: ${this.engineСapacity}, Consumption: ${this.consumption}`);
     }
-}
+};
 
 class Auto_Electric extends Auto {
     constructor (brand, model, year, vin, batteryCapacity) {
@@ -33,15 +30,15 @@ class Auto_Electric extends Auto {
         this.batteryCapacity = batteryCapacity;
     }
     showBatteryConfig() {
-        console.log(this.batteryCapacity)
+        console.log(this.batteryCapacity);
     }
-}
+};
 
 let newCar = new Auto_Fuel('Audi', 'B6', '2020', 'AF12124AEGJ32413', '2л', '100км/ч');
-let tesla = new Auto_Electric('Tesla', 'Model X', 2020, 'AF12124AEGJ32413', '100 кВт/ч')
+let tesla = new Auto_Electric('Tesla', 'Model X', '2020', 'AF12124AEGJ34139', '100 кВт/ч');
 
-// batteryCapacity
 tesla.log();
-console.log(tesla.checkVin());
+tesla.checkVin();
 tesla.showBatteryConfig();
-newCar.showFuelConsumption()
+newCar.log();
+newCar.showFuelConsumption();
