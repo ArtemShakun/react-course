@@ -5,6 +5,8 @@ import Preloader from './Preloader';
 import Cart from './Cart';
 import BasketList from './BasketList';
 import Alert from './Alert';
+import Search from './Search';
+import Filters from './Filters';
 
 function Shop() {
     const [goods, setGoods] = useState([]);
@@ -12,6 +14,26 @@ function Shop() {
     const [order, setOrder] = useState([]);
     const [isBasketShow, setBasketShow] = useState(false);
     const [alertName, setAlertName] = useState('');
+    const [filterCatalog, setFilterCatalog] = useState('');
+    const [brand, setBrand] = useState([]);
+
+    const filterByName = (e) => {
+        if (e.target.checked) {
+            const newArr = goods.filter(
+                (item) => item.brand === e.target.value
+            );
+            setBrand([...brand, ...newArr]);
+            setFilterCatalog([...brand, ...newArr]);
+        } else {
+            if (brand.length !== 0) {
+                const newArr = brand.filter(
+                    (item) => item.brand !== e.target.value
+                );
+                setBrand(newArr);
+                setFilterCatalog(newArr.length !== 0 ? [...newArr] : goods);
+            }
+        }
+    };
 
     const addToBasket = (item) => {
         const itemIndex = order.findIndex(
@@ -82,31 +104,59 @@ function Shop() {
         setAlertName('');
     };
 
+    const searchProducts = (e) => {
+        setFilterCatalog(
+            goods.filter((item) =>
+                item.name.toLowerCase().includes(e.target.value.toLowerCase())
+            )
+        );
+    };
+
     useEffect(() => {
         setTimeout(() => {
             setGoods(shopList);
+            setFilterCatalog(shopList);
             setLoading(false);
         }, 1000);
     }, [goods]);
+
     return (
-        <main className="container">
-            <Cart quantity={order.length} handleBasketShow={handleBasketShow} />
-            {isLoading ? (
-                <Preloader />
-            ) : (
-                <GoodsList goods={goods} addToBasket={addToBasket} />
-            )}
-            {isBasketShow && (
-                <BasketList
-                    order={order}
-                    handleBasketShow={handleBasketShow}
-                    removeFromBasket={removeFromBasket}
-                    incQuantity={incQuantity}
-                    decQuantity={decQuantity}
+        <div className="row">
+            <div className="col-3">
+                <Filters
+                    goods={goods}
+                    searchProducts={searchProducts}
+                    filterByName={filterByName}
                 />
-            )}
-            {alertName && <Alert name={alertName} closeAlert={closeAlert} />}
-        </main>
+            </div>
+            <div className="col-9">
+                <Search searchProducts={searchProducts} />
+                <Cart
+                    quantity={order.length}
+                    handleBasketShow={handleBasketShow}
+                />
+                {isLoading ? (
+                    <Preloader />
+                ) : (
+                    <GoodsList
+                        goods={filterCatalog}
+                        addToBasket={addToBasket}
+                    />
+                )}
+                {isBasketShow && (
+                    <BasketList
+                        order={order}
+                        handleBasketShow={handleBasketShow}
+                        removeFromBasket={removeFromBasket}
+                        incQuantity={incQuantity}
+                        decQuantity={decQuantity}
+                    />
+                )}
+                {alertName && (
+                    <Alert name={alertName} closeAlert={closeAlert} />
+                )}
+            </div>
+        </div>
     );
 }
 

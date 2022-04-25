@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 function GoodsItem(props) {
     const {
         id,
@@ -8,13 +9,15 @@ function GoodsItem(props) {
     } = props;
     return (
         <div className="card">
-            <img
-                src={images}
-                className="card-img-bottom mx-auto pt-5"
-                alt={name}
-            />
+            <NavLink to={`/product/${id}`}>
+                <img
+                    src={images}
+                    className="card-img-bottom mx-auto d-block pt-5"
+                    alt={name}
+                />
+            </NavLink>
             <div className="card-body d-flex flex-column">
-                <h5 className="card-title mt-auto fs-6 pt-5">{name}</h5>
+                <h5 className="card-title mt-auto fs-6">{name}</h5>
                 <p className="card-text fs-5">{prices} UAH</p>
                 <button
                     className="btn btn-primary"

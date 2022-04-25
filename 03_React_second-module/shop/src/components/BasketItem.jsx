@@ -17,7 +17,7 @@ function BasketItem(props) {
             >
                 remove
             </i>{' '}
-            x{quantity}{' '}
+            Qty {quantity}{' '}
             <i
                 className="material-icons basketQuantity"
                 onClick={() => incQuantity(id)}

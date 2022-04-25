@@ -7,7 +7,7 @@
 
 # testing
 /coverage
-
+tasks.md
 # production
 /build
 

@@ -1,18 +1,16 @@
-function Search() {
+function Search(props) {
+    const { searchProducts = Function.prototype } = props;
     return (
-        <nav className="grey darken-4">
-            <div className="nav-wrapper">
-                <form>
-                    <div className="input-field">
-                        <input id="search" type="search" required />
-                        <label className="label-icon" for="search">
-                            <i className="material-icons">search</i>
-                        </label>
-                        <i className="material-icons">close</i>
-                    </div>
-                </form>
-            </div>
-        </nav>
+        <div className="form-floating mb-3 mt-5">
+            <input
+                type="search"
+                className="form-control"
+                id="floatingInput"
+                placeholder="Search..."
+                onChange={searchProducts}
+            />
+            <label htmlFor="floatingInput">Search</label>
+        </div>
     );
 }
 

@@ -111,3 +111,28 @@ nav {
     transform: translateY(0rem);
   }
 }
+.filters-block {
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 10px;
+}
+.registration{
+  height: 80vh;
+  width: 100%;
+}
+
+.registration-forms{
+  width: 50%;
+  padding: 20px;
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2)
+}
+
+.registration-form-title{
+  margin: 20px 0px 20px 0px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(0,0,0,0.3);
+}
+
+.UserName{
+  color:white;
+}
