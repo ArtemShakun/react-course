@@ -1,9 +1,13 @@
+import { useDispatch } from 'react-redux';
+import { handleBasketShow } from '../store/shopSlice';
+
 function Cart(props) {
-    const { quantity = 0, handleBasketShow = Function.prototype } = props;
+    const dispatch = useDispatch();
+    const { quantity = 0 } = props;
     return (
         <div
             className="cart btn btn-outline-success"
-            onClick={handleBasketShow}
+            onClick={() => dispatch(handleBasketShow())}
         >
             <i className="material-icons shopping-cart-icon">shopping_cart</i>
             {quantity ? (

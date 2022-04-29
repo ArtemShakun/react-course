@@ -1,11 +1,14 @@
+import { useSelector } from 'react-redux';
 import GoodsItem from './GoodsItem';
 
-function GoodList(props) {
-    const { goods = [], addToBasket = Function.prototype } = props;
+function GoodList() {
+    const { filterProduct, goods } = useSelector((state) => state.shop);
+    const products = filterProduct.length ? filterProduct : goods;
+
     return (
         <div className="goods m-5">
-            {goods.map((item) => (
-                <GoodsItem key={item.id} {...item} addToBasket={addToBasket} />
+            {products.map((item) => (
+                <GoodsItem key={item.id} {...item} />
             ))}
         </div>
     );

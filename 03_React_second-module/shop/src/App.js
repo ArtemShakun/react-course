@@ -1,44 +1,37 @@
+// react 
 import React from "react";
 import { BrowserRouter, Routes, Route} from "react-router-dom";
-import Shop from "./components/Shop";
+import { Provider } from 'react-redux';
+// store
+import store from './store/index';
+// react components
 import Layout from './components/Layout'
 
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Product from "./pages/Product";
-import NotFound from "./pages/NotFound";
-import Login from "./pages/Login";
-import RequireAuth from "./components/hoc/RequireAuth";
-import { AuthProvider } from "./components/hoc/AuthProvider";
+// page
+import ShopPage from "./pages/ShopPage";
+import HomePage from "./pages/HomePage";
+import AboutPage from "./pages/AboutPage";
+import ProductPage from "./pages/ProductPage";
+import LoginPage from "./pages/LoginPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
  
   return (
-    <AuthProvider>
+      <Provider store={store}>
       <BrowserRouter>
           <Routes>
             <Route path="/" element={<Layout />} >
-              <Route index element={<Home />} />
-
-              <Route path="products" element={
-                <RequireAuth>
-                  <Shop />
-                </RequireAuth>
-              } />
-
-              <Route path="product/:id" element={
-               <RequireAuth>
-                 <Product />
-               </RequireAuth>
-              } />
-
-              <Route path="about" element={<About />} />
-              <Route path="login" element={<Login />} />
-              <Route path="*" element={<NotFound />} />
+              <Route index element={<HomePage />} />
+              <Route path="products" element={<ShopPage />} />
+              <Route path="product/:id" element={<ProductPage />} />
+              <Route path="about" element={<AboutPage />} />
+              <Route path="login" element={<LoginPage />} />
+              <Route path="*" element={<NotFoundPage />} />
             </Route>
           </Routes>
         </BrowserRouter>
-    </AuthProvider>
+        </Provider>
   );
 }
 

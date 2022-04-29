@@ -1,13 +1,9 @@
+import { useDispatch } from 'react-redux';
+import { handleBasketShow } from '../store/shopSlice';
 import BasketItem from './BasketItem';
 
-function BasketList(props) {
-    const {
-        order = [],
-        handleBasketShow = Function.prototype,
-        removeFromBasket = Function.prototype,
-        incQuantity = Function.prototype,
-        decQuantity = Function.prototype,
-    } = props;
+function BasketList({ order }) {
+    const dispatch = useDispatch();
     const totalPrice = order.reduce((sum, el) => {
         return sum + el.prices * el.quantity;
     }, 0);
@@ -17,21 +13,16 @@ function BasketList(props) {
                 className="list-group-item active basket-li"
                 aria-current="true"
             >
-                <span className="closeButton" onClick={handleBasketShow}>
+                <span
+                    className="closeButton"
+                    onClick={() => dispatch(handleBasketShow())}
+                >
                     <i className="material-icons">close</i>
                 </span>
                 Basket
             </li>
             {order.length ? (
-                order.map((item) => (
-                    <BasketItem
-                        key={item.id}
-                        {...item}
-                        removeFromBasket={removeFromBasket}
-                        incQuantity={incQuantity}
-                        decQuantity={decQuantity}
-                    />
-                ))
+                order.map((item) => <BasketItem key={item.id} {...item} />)
             ) : (
                 <li className="list-group-item">Basket empty</li>
             )}

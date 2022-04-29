@@ -9,7 +9,8 @@ const shopList = [
         "brand":'Honor',
         "rating": 40,
         "color_code": "008000",
-        "prices": "1309.00"
+        "prices": "1309.00",
+        "memory": '8 ГБ'
     },
     {
         "id": 3093026,
@@ -19,10 +20,10 @@ const shopList = [
         "images":"//content2.onliner.by/catalog/device/header/32da9b518aff15a22314d05ad01c413f.jpeg",
         "description": "Android, экран 6.78&quot; IPS (1080x2388), Qualcomm Snapdragon 680, ОЗУ 8 ГБ, флэш-память 128 ГБ, карты памяти, камера 108 Мп, аккумулятор 4000 мАч, 2 SIM",
         "brand": 'Huawei',
-        
         "rating": 50,
         "color_code": "0000ff",
-        "prices": "1159.00"
+        "prices": "1159.00",
+        "memory": '8 ГБ',
     
     },
     {
@@ -35,7 +36,8 @@ const shopList = [
         "brand": "Xiaomi",
         "rating": 40,
         "color_code": "808080",
-        "prices": "980.00"
+        "prices": "980.00",
+        "memory": '8 ГБ',
     },
     {
         "id": 2382499,
@@ -47,7 +49,8 @@ const shopList = [
         "brand": "Poco",
         "rating": 40,
         "color_code": "ffff00",
-        "prices": "695.00"
+        "prices": "695.00",
+        "memory": '6 ГБ',
     },
     {
         "id": 2227269,
@@ -59,7 +62,8 @@ const shopList = [
         "brand": "Samsung",
         "rating": 40,
         "color_code": "0000ff",
-        "prices": "1200.00"
+        "prices": "1200.00",
+        "memory": '8 ГБ',
     },
     {
         "id": 1928640,
@@ -71,7 +75,8 @@ const shopList = [
         "brand": "Xiaomi",
         "rating": 40,
         "color_code": "008000",
-        "prices": "330.00"
+        "prices": "330.00",
+        "memory": '2 ГБ',
     },
     {
         "id": 2250100,
@@ -83,7 +88,8 @@ const shopList = [
         "brand": "POCO",
         "rating": 45,
         "color_code": "000000",
-        "prices":"969.00"
+        "prices":"969.00",
+        "memory": '8 ГБ',
     },
     {
         "id": 2338617,
@@ -95,7 +101,8 @@ const shopList = [
         "brand": "Xiaomi",
         "rating": 45,
         "color_code": "808080",
-        "prices": "780.00"
+        "prices": "780.00",
+        "memory": '6 ГБ',
     },
     {
         "id": 2646655,
@@ -107,7 +114,8 @@ const shopList = [
         "brand": "Apple",
         "rating": 45,
         "color_code": "000000",
-        "prices": "2650.00"
+        "prices": "2650.00",
+        "memory": '4 ГБ',
     
     },
     {
@@ -120,7 +128,8 @@ const shopList = [
         "brand": "Apple",
         "rating": 45,
         "color_code": "000000",
-        "prices": "1680.00"
+        "prices": "1680.00",
+        "memory": '4 ГБ',
     },
     {
         "id": 2028979,
@@ -132,7 +141,8 @@ const shopList = [
         "brand": "Apple",
         "rating": 45,
         "color_code": "000000",
-        "prices": "2650.00"
+        "prices": "2650.00",
+        "memory": '4 ГБ',
     },
     {
         "id": 2646748,
@@ -144,7 +154,8 @@ const shopList = [
         "brand": "Apple",
         "rating": 40,
         "color_code": "302c28",
-        "prices": "3650.00"
+        "prices": "3650.00",
+        "memory": '6 ГБ',
     },
     {
         "id": 2663603,
@@ -156,7 +167,8 @@ const shopList = [
         "brand": "Xiaomi",
         "rating": 45,
         "color_code": "000000",
-        "prices": "1075.00"
+        "prices": "1075.00",
+        "memory": '8 ГБ',
     }
 ]
 

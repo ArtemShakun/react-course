@@ -1,10 +1,12 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
-import { useAuth } from '../components/hook/useAuth';
+import { useSelector, useDispatch } from 'react-redux';
+import { removeUser } from '../store/authSlice';
 
 function Layout() {
-    const isLogin = localStorage.getItem('userName');
-    const { signOut } = useAuth();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const isAuth = useSelector((state) => state.user.userName);
+
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -31,26 +33,28 @@ function Layout() {
                         </li>
                     </ul>
                     <p style={{ color: 'white' }}>
-                        {!isLogin ? (
-                            <button
+                        {!isAuth ? (
+                            <span
+                                className="log"
                                 onClick={() =>
-                                    signOut(() =>
-                                        navigate('/products', { replace: true })
-                                    )
+                                    navigate('/login', { replace: true })
                                 }
                             >
                                 LogIn
-                            </button>
+                            </span>
                         ) : (
-                            <button
-                                onClick={() =>
-                                    signOut(() =>
-                                        navigate('/', { replace: true })
-                                    )
-                                }
-                            >
-                                LogOut
-                            </button>
+                            <>
+                                <p>Hello, {isAuth}</p>
+                                <span
+                                    className="log"
+                                    onClick={() => {
+                                        dispatch(removeUser());
+                                        navigate('/login', { replace: true });
+                                    }}
+                                >
+                                    LogOut
+                                </span>
+                            </>
                         )}
                     </p>
                 </div>

@@ -1,12 +1,9 @@
 import { NavLink } from 'react-router-dom';
-function GoodsItem(props) {
-    const {
-        id,
-        name,
-        images,
-        prices,
-        addToBasket = Function.prototype,
-    } = props;
+import { useDispatch } from 'react-redux';
+import { addToBasket } from '../store/shopSlice';
+
+function GoodsItem({ id, name, images, prices }) {
+    const dispatch = useDispatch();
     return (
         <div className="card">
             <NavLink to={`/product/${id}`}>
@@ -22,11 +19,14 @@ function GoodsItem(props) {
                 <button
                     className="btn btn-primary"
                     onClick={() =>
-                        addToBasket({
-                            id,
-                            name,
-                            prices,
-                        })
+                        dispatch(
+                            addToBasket({
+                                id,
+                                name,
+                                prices,
+                                images,
+                            })
+                        )
                     }
                 >
                     Add to Basket

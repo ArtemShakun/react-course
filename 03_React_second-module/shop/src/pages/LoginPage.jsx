@@ -1,11 +1,12 @@
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useAuth } from '../components/hook/useAuth';
+// react
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+// store
+import { setUser } from '../store/authSlice';
 
-function Login() {
+function LoginPage() {
     const navigate = useNavigate();
-    const location = useLocation();
-    const fromPage = location.state?.from?.pathname || '/';
-    const { signIn } = useAuth();
+    const dispatch = useDispatch();
 
     const validateName = (e) => {
         const inputName = document.querySelector('.form-control');
@@ -24,9 +25,8 @@ function Login() {
         e.preventDefault();
         const form = e.target;
         const user = form.username.value;
-        signIn(user, () => {
-            navigate(fromPage, { replace: true });
-        });
+        dispatch(setUser({ user }));
+        navigate('/products', { replace: true });
     };
 
     return (
@@ -66,4 +66,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default LoginPage;

@@ -1,13 +1,9 @@
+import { useSelector } from 'react-redux';
 import FilterBrand from './FilterBrand';
-function Filters(props) {
-    const { goods = [], filterByName = Function.prototype } = props;
+import FilterMemory from './FilterMemory';
 
-    const brandArr = [];
-    goods.map((item) => {
-        if (!brandArr.includes(item.brand)) {
-            brandArr.push(item.brand);
-        }
-    });
+function Filters() {
+    const { brands, memory } = useSelector((state) => state.shop);
     return (
         <div className="col mt-5 filters-block">
             <h3>Filters</h3>
@@ -37,12 +33,42 @@ function Filters(props) {
                         data-bs-parent="#accordionExample"
                     >
                         <div className="accordion-body">
-                            {brandArr.map((item, index) => (
-                                <FilterBrand
-                                    key={index}
-                                    brand={item}
-                                    filterByName={filterByName}
-                                />
+                            {brands.map((item) => (
+                                <FilterBrand key={item} brand={item} />
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="accordion" id="accordionExample">
+                <div className="accordion-item">
+                    <h2 className="accordion-header" id="headingOne">
+                        <button
+                            className="accordion-button"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne"
+                            aria-expanded="true"
+                            aria-controls="collapseOne"
+                            onClick={() =>
+                                document
+                                    .querySelector('.accordion-collapse')
+                                    .classList.toggle('show')
+                            }
+                        >
+                            Memory
+                        </button>
+                    </h2>
+                    <div
+                        id="collapseOne"
+                        className="accordion-collapse collapse show"
+                        aria-labelledby="headingOne"
+                        data-bs-parent="#accordionExample"
+                    >
+                        <div className="accordion-body">
+                            {memory.map((item) => (
+                                <FilterMemory key={item} memory={item} />
                             ))}
                         </div>
                     </div>

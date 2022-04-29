@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { closeAlert } from '../store/shopSlice';
 
-function Alert(props) {
-    const { name = '', closeAlert = Function.prototype } = props;
+function Alert({ name }) {
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        const timerID = setTimeout(closeAlert, 2000);
+        const timerID = setTimeout(() => dispatch(closeAlert()), 2000);
         return () => {
             clearTimeout(timerID);
         };
