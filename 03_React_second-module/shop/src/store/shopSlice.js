@@ -28,9 +28,7 @@ export const shopSlice = createSlice({
         goods:[],
         order: [],
         brands:[],
-        memory:[],
         filterProduct: [],
-        searchProducts: [],
         showProduct:[],
         productById: [],
         isBasketShow: false,
@@ -107,7 +105,7 @@ export const shopSlice = createSlice({
                 state.showProduct = state.goods.filter((item) => item.name.toLowerCase().includes(action.payload.value));
             }
         },
-        filteredProducts: (state, action) => {
+        filteredProductsByBrand: (state, action) => {
             if (action.payload.isChecked) {
                 state.goods.filter(item => (item.brand === action.payload.brandName) ? state.filterProduct.push(item) : '');
                 state.showProduct = [...state.filterProduct];
@@ -137,11 +135,6 @@ export const shopSlice = createSlice({
                         state.brands.push(item.brand)
                     };
             });
-            action.payload.forEach(item => {
-                if (!state.memory.includes(item.memory)) {
-                        state.memory.push(item.memory)
-                    };
-            });
         },
         [fetchProducts.rejected]: (state, action) => {
             state.status = 'rejected';
@@ -159,7 +152,7 @@ export const shopSlice = createSlice({
       decQuantity,
       removeFromBasket,
       searchProducts,
-      filteredProducts,
+      filteredProductsByBrand,
       findProductById,
     } = shopSlice.actions
   

@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addToBasket } from '../store/shopSlice';
 
-function GoodsItem({ id, name, images, prices }) {
+function GoodsItem({ id, name, images, prices, memory }) {
     const dispatch = useDispatch();
     return (
         <div className="card">
@@ -14,7 +14,9 @@ function GoodsItem({ id, name, images, prices }) {
                 />
             </NavLink>
             <div className="card-body d-flex flex-column">
-                <h5 className="card-title mt-auto fs-6">{name}</h5>
+                <h5 className="card-title mt-auto fs-6">
+                    {name} ОЗУ {memory}
+                </h5>
                 <p className="card-text fs-5">{prices} UAH</p>
                 <button
                     className="btn btn-primary"

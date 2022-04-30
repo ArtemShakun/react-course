@@ -1,14 +1,13 @@
 import { useDispatch } from 'react-redux';
-import { filteredProducts } from '../store/shopSlice';
+import { filteredProductsByBrand } from '../store/shopSlice';
 
-function FilterMemory({ memory }) {
+function FilterBrands({ brandName }) {
     const dispatch = useDispatch();
-
-    // const filteredProduct = (e) => {
-    //     const brandName = e.target.value;
-    //     const isChecked = e.target.checked;
-    //     dispatch(filteredProducts({ brandName, isChecked }));
-    // };
+    const filteredProduct = (e) => {
+        const brandName = e.target.value;
+        const isChecked = e.target.checked;
+        dispatch(filteredProductsByBrand({ brandName, isChecked }));
+    };
 
     return (
         <>
@@ -16,16 +15,16 @@ function FilterMemory({ memory }) {
                 <input
                     className="form-check-input"
                     type="checkbox"
-                    value={memory}
+                    value={brandName}
                     id="flexCheckDefault"
-                    // onChange={filteredProduct}
+                    onChange={filteredProduct}
                 />
                 <label className="form-check-label" htmlFor="flexCheckDefault">
-                    {memory}
+                    {brandName}
                 </label>
             </div>
         </>
     );
 }
 
-export default FilterMemory;
+export default FilterBrands;
