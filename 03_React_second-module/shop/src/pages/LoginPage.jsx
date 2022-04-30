@@ -54,6 +54,7 @@ function LoginPage() {
                                 id="inputUserName"
                                 name="username"
                                 onBlur={validateName}
+                                onKeyDown={validateName}
                             />
                         </div>
                     </div>
