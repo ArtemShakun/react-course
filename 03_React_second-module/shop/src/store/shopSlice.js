@@ -31,6 +31,7 @@ export const shopSlice = createSlice({
         memory:[],
         filterProduct: [],
         searchProducts: [],
+        showProduct:[],
         productById: [],
         isBasketShow: false,
         alertName: '',
@@ -100,17 +101,22 @@ export const shopSlice = createSlice({
             state.order = newOrder;
         },
         searchProducts: (state, action) => {
-                state.filterProduct = state.goods.filter((item) => item.name.toLowerCase().includes(action.payload.value));
+            if (state.filterProduct.length) {
+                state.showProduct = state.filterProduct.filter((item) => item.name.toLowerCase().includes(action.payload.value));
+            } else {
+                state.showProduct = state.goods.filter((item) => item.name.toLowerCase().includes(action.payload.value));
+            }
         },
         filteredProducts: (state, action) => {
             if (action.payload.isChecked) {
-                state.goods.filter(item => {
-                   if (item.brand === action.payload.brandName) {
-                       state.filterProduct.push(item);
-                   }
-                });
+                state.goods.filter(item => (item.brand === action.payload.brandName) ? state.filterProduct.push(item) : '');
+                state.showProduct = [...state.filterProduct];
             } else {
                 state.filterProduct = state.filterProduct.filter(item => item.brand !== action.payload.brandName);
+                state.showProduct = state.filterProduct;
+                if (!state.showProduct.length) {
+                    state.showProduct = state.goods;
+                }
             }
         },
         findProductById: (state, action) => {
@@ -125,6 +131,7 @@ export const shopSlice = createSlice({
         [fetchProducts.fulfilled]: (state, action) => {
             state.status = 'resolved';
             state.goods = action.payload;
+            state.showProduct = action.payload;
             action.payload.forEach(item => {
                 if (!state.brands.includes(item.brand)) {
                         state.brands.push(item.brand)

@@ -2,7 +2,6 @@ import { useDispatch } from 'react-redux';
 import { filteredProducts } from '../store/shopSlice';
 
 function FilterMemory({ memory }) {
-    console.log(memory);
     const dispatch = useDispatch();
 
     // const filteredProduct = (e) => {
