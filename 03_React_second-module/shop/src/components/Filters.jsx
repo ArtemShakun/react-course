@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import FilterBrands from './FilterBrands';
 
 function Filters() {
-    const { brands } = useSelector((state) => state.shop);
+    const brands  = useSelector((state) => state.shop.brands);
     return (
         <div className="col mt-5 filters-block">
             <h3>Filters</h3>

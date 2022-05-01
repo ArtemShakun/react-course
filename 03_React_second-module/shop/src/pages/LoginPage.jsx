@@ -23,8 +23,7 @@ function LoginPage() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const form = e.target;
-        const user = form.username.value;
+        const user = e.target.username.value;
         dispatch(setUser({ user }));
         navigate('/products', { replace: true });
     };

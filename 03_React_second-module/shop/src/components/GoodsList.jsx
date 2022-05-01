@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import GoodsItem from './GoodsItem';
 
 function GoodList() {
-    const { showProduct } = useSelector((state) => state.shop);
+    const showProduct = useSelector((state) => state.shop.showProduct);
 
     return (
         <div className="goods m-5">

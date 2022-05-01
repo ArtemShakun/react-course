@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 function ProductItem(props) {
-    const { name, images, description, prices, rating } = props;
+    const { name, images, description, prices} = props;
     const goBack = useNavigate();
     return (
         <>

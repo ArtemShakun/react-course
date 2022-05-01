@@ -16,9 +16,8 @@ export const fetchProducts = createAsyncThunk(
         } catch (error) {
             return rejectWithValue(error.message)
         }
-        
     }
-)
+);
 
 export const shopSlice = createSlice({
     name: 'shop',
@@ -69,10 +68,9 @@ export const shopSlice = createSlice({
         incQuantity: (state, action) => {
             const newOrder = state.order.map((el) => {
                 if (el.id === action.payload.id) {
-                    const newQuantity = el.quantity + 1;
                     return {
                         ...el,
-                        quantity: newQuantity,
+                        quantity: el.quantity + 1,
                     };
                 } else {
                     return el;
@@ -95,15 +93,11 @@ export const shopSlice = createSlice({
             state.order = newOrder;
         },
         removeFromBasket: (state, action) => {
-            const newOrder = state.order.filter((el) => el.id !== action.payload.id);
-            state.order = newOrder;
+            state.order = state.order.filter((el) => el.id !== action.payload.id);
         },
         searchProducts: (state, action) => {
-            if (state.filterProduct.length) {
-                state.showProduct = state.filterProduct.filter((item) => item.name.toLowerCase().includes(action.payload.value));
-            } else {
-                state.showProduct = state.goods.filter((item) => item.name.toLowerCase().includes(action.payload.value));
-            }
+            const searchArr = (state.filterProduct.length) ? state.filterProduct : state.goods;
+            state.showProduct = searchArr.filter((item) => item.name.toLowerCase().includes(action.payload.value));
         },
         filteredProductsByBrand: (state, action) => {
             if (action.payload.isChecked) {
@@ -132,7 +126,7 @@ export const shopSlice = createSlice({
             state.showProduct = action.payload;
             action.payload.forEach(item => {
                 if (!state.brands.includes(item.brand)) {
-                        state.brands.push(item.brand)
+                        state.brands.push(item.brand);
                     };
             });
         },

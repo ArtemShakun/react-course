@@ -32,7 +32,7 @@ function Layout() {
                             </NavLink>
                         </li>
                     </ul>
-                    <p style={{ color: 'white' }}>
+                    <div style={{ color: 'white' }}>
                         {!isAuth ? (
                             <span
                                 className="log"
@@ -44,7 +44,7 @@ function Layout() {
                             </span>
                         ) : (
                             <>
-                                <p>Hello, {isAuth}</p>
+                                <div>Hello, {isAuth}</div>
                                 <span
                                     className="log"
                                     onClick={() => {
@@ -56,7 +56,7 @@ function Layout() {
                                 </span>
                             </>
                         )}
-                    </p>
+                    </div>
                 </div>
             </nav>
 
